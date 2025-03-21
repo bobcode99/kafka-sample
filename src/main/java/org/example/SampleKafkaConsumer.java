@@ -39,7 +39,11 @@ public class SampleKafkaConsumer {
                     logger.info("Consumed: key={}, value={}, partition={}, offset={}",
                             record.key(), record.value(), record.partition(), record.offset());
 
-                    consumer.commitSync();
+                    logger.info("start sleep");
+                    Thread.sleep(10000);
+                    logger.info("finish sleep");
+
+//                    consumer.commitSync();
                 }
             }
         } catch (Exception e) {
