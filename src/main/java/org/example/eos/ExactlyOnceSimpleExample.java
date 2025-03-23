@@ -34,13 +34,16 @@ public class ExactlyOnceSimpleExample {
 
         KStream<String, String> processedStream = inputStream.mapValues(value -> {
             logger.info("Processing value: {}", value);
-            try {
-                logger.info("Starting sleep for value={}", value);
-                Thread.sleep(10000); // 10-second sleep to exceed max.poll.interval.ms
-                logger.info("Finished sleep for value={}", value);
-            } catch (InterruptedException e) {
-                logger.error("Sleep interrupted for value={}", value, e);
-                Thread.currentThread().interrupt();
+
+            if(value.contains("25")) {
+                try {
+                    logger.info("Starting sleep for value={}", value);
+                    Thread.sleep(10000); // 10-second sleep to exceed max.poll.interval.ms
+                    logger.info("Finished sleep for value={}", value);
+                } catch (InterruptedException e) {
+                    logger.error("Sleep interrupted for value={}", value, e);
+                    Thread.currentThread().interrupt();
+                }
             }
             return value.toUpperCase();
         });
