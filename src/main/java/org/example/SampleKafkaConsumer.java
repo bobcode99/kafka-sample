@@ -43,6 +43,7 @@ public class SampleKafkaConsumer {
                     Thread.sleep(10000);
                     logger.info("finish sleep");
 
+                    // at first need let commit sync let it CURRENT-OFFSET equal LOG-END-OFFSET
 //                    consumer.commitSync();
                 }
             }
